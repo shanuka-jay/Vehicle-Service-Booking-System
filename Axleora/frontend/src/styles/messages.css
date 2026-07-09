@@ -1,0 +1,67 @@
+.message-list {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.message-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10px 220px 1fr 100px;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 22px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.message-row:hover { background: #f7fafc; }
+.message-row.unread { background: #f0f9fd; }
+.message-row:last-child { border-bottom: 0; }
+.message-row span { min-width: 0; }
+.message-row strong, .message-row small { display: block; }
+.message-row small {
+  margin-top: 4px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.message-row time { color: var(--muted); font-size: 10px; text-align: right; }
+.message-dot { width: 8px; height: 8px; border-radius: 50%; background: transparent; }
+.message-row.unread .message-dot { background: var(--blue); }
+.message-body {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 10px;
+  background: var(--soft);
+  white-space: pre-wrap;
+  line-height: 1.75;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.detail-modal .detail-grid {
+  gap: 14px 16px;
+}
+.detail-modal .detail-grid > div {
+  min-width: 0;
+}
+.detail-modal .detail-grid strong,
+.detail-modal .detail-grid a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.image-modal { position: relative; }
+.image-modal .modal-close { color: var(--ink); z-index: 2; }
+
+@media (max-width: 780px) {
+  .message-row { grid-template-columns: 8px 1fr auto; gap: 10px; }
+  .message-row > span:nth-child(3) { grid-column: 2 / -1; }
+  .message-row time { grid-column: 3; grid-row: 1; }
+}
