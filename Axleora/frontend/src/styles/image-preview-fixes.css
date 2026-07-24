@@ -1,0 +1,7 @@
+.pending-image-grid article>div{display:flex;align-items:center;gap:6px;padding:7px}
+.pending-image-grid article>div small{padding:0;min-width:0;flex:1}
+.pending-image-grid article>div button{width:25px;height:25px;flex:0 0 25px;border:0;border-radius:7px;background:#fff0f2;color:var(--red);cursor:pointer}
+.pending-image-grid article>div button:hover{background:#ffdfe4;transform:scale(1.05)}
+.existing-cover-preview img{background:#eaf0f3}
+.existing-cover-preview>div{min-width:0}
+.existing-cover-preview>div strong{overflow-wrap:anywhere}

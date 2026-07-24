@@ -1,0 +1,8 @@
+.existing-cover-preview{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:center;padding:12px;margin-bottom:14px;border:1px solid var(--line);border-radius:13px;background:#f7fafb}
+.existing-cover-preview img{width:100%;height:145px;object-fit:cover;border-radius:9px}
+.existing-cover-preview strong,.existing-cover-preview small{display:block}
+.existing-cover-preview small{margin-top:6px;color:var(--muted);font-size:10px;line-height:1.5}
+.cover-delete-btn{margin-top:15px;padding:8px 11px;border:1px solid #ffd0d7;border-radius:8px;background:#fff3f5;color:var(--red);font-size:10px;font-weight:900;cursor:pointer}
+.cover-delete-btn.neutral{border-color:var(--line);background:#fff;color:#526773}
+.cover-delete-btn:hover{transform:translateY(-1px)}
+@media(max-width:620px){.existing-cover-preview{grid-template-columns:1fr}.existing-cover-preview img{height:210px}}
