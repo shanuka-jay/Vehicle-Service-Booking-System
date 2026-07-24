@@ -1,12 +1,6 @@
-# Axleora MERN Edition
+# Axleora Vehical Service Booking System
 
 Deployment-oriented Vehicle Service Booking System built with React, Express, Node.js, MongoDB Atlas through Prisma ORM, and Cloudinary image storage.
-
-This is a separate edition from the SQLite build. It keeps the same customer website and administration workflows while replacing:
-
-- SQLite with MongoDB Atlas
-- Numeric IDs with MongoDB ObjectIds
-- Local file uploads with Cloudinary
 
 ## Stack
 
