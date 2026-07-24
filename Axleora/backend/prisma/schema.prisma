@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  fullName     String    @default("Workshop Administrator")
+  username     String    @unique
+  email        String?
+  phone        String?
+  passwordHash String
+  role         String    @default("STAFF")
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([email])
+}
+
+model ServiceGroup {
+  id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  name        String            @unique
+  slug        String            @unique
+  description String?
+  isActive    Boolean           @default(true)
+  sortOrder   Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  services    ServiceCategory[]
+}
+
+model ServiceCategory {
+  id                String         @id @default(auto()) @map("_id") @db.ObjectId
+  name              String         @unique
+  slug              String?        @unique
+  description       String
+  longDescription   String?
+  estimatedDuration String?
+  priceRange        String?
+  imageUrl          String?
+  imagePublicId     String?
+  includedItems     String         @default("[]")
+  benefits          String         @default("[]")
+  isFeatured        Boolean        @default(false)
+  isActive          Boolean        @default(true)
+  groupId           String?        @db.ObjectId
+  group             ServiceGroup?  @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  images            ServiceImage[]
+  bookings          Booking[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+}
+
+model ServiceImage {
+  id        String          @id @default(auto()) @map("_id") @db.ObjectId
+  serviceId String          @db.ObjectId
+  service   ServiceCategory @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  imageUrl  String
+  publicId  String?
+  altText   String?
+  sortOrder Int             @default(0)
+  createdAt DateTime        @default(now())
+
+  @@index([serviceId])
+}
+
+model SiteSetting {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  customerName String
+  vehicleLabel String?
+  quote        String
+  rating       Int      @default(5)
+  isFeatured   Boolean  @default(true)
+  isActive     Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Booking {
+  id                String          @id @default(auto()) @map("_id") @db.ObjectId
+  referenceNo       String          @unique
+  customerName      String
+  phone             String
+  email             String?
+  vehicleNumber     String
+  vehicleType       String
+  vehicleModel      String?
+  serviceCategoryId String          @db.ObjectId
+  serviceCategory   ServiceCategory @relation(fields: [serviceCategoryId], references: [id])
+  preferredDate     String
+  preferredTime     String
+  notes             String?
+  photoUrl          String?
+  photoPublicId     String?
+  status            String          @default("Pending")
+  adminRemark       String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([serviceCategoryId])
+  @@index([preferredDate, preferredTime, status])
+  @@index([phone])
+}
+
+model ContactMessage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  phone     String?
+  email     String
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead, createdAt])
+}

@@ -1,0 +1,23 @@
+import { Router } from "express";
+import { createGroup, createService, deleteGroup, deleteService, deleteServiceCover, listGroups, listServices, publicGroups, publicService, publicServices, updateGroup, updateService } from "../controllers/service.controller.js";
+import { addServiceImages, deleteServiceImage, reorderServiceImages } from "../controllers/serviceImage.controller.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
+import { upload } from "../middleware/upload.middleware.js";
+
+const router = Router();
+router.get("/public", publicServices);
+router.get("/public/groups", publicGroups);
+router.get("/public/:slug", publicService);
+router.get("/groups", requireAuth, listGroups);
+router.post("/groups", requireAuth, createGroup);
+router.put("/groups/:id", requireAuth, updateGroup);
+router.delete("/groups/:id", requireAuth, deleteGroup);
+router.get("/", requireAuth, listServices);
+router.post("/", requireAuth, upload.single("image"), createService);
+router.post("/:id/images", requireAuth, upload.array("images", 8), addServiceImages);
+router.put("/:id/images/order", requireAuth, reorderServiceImages);
+router.delete("/:id/images/:imageId", requireAuth, deleteServiceImage);
+router.delete("/:id/cover", requireAuth, deleteServiceCover);
+router.put("/:id", requireAuth, upload.single("image"), updateService);
+router.delete("/:id", requireAuth, deleteService);
+export default router;

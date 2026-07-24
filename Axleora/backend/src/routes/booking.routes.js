@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { createBooking, deleteBooking, getBooking, listBookings, searchStatus, updateStatus } from "../controllers/booking.controller.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
+import { upload } from "../middleware/upload.middleware.js";
+const router = Router();
+router.post("/", upload.single("photo"), createBooking);
+router.get("/status/search", searchStatus);
+router.get("/", requireAuth, listBookings);
+router.get("/:id", requireAuth, getBooking);
+router.put("/:id/status", requireAuth, updateStatus);
+router.delete("/:id", requireAuth, deleteBooking);
+export default router;
