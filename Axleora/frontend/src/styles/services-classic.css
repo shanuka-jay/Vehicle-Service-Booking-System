@@ -1,6 +1,0 @@
-.admin-title-actions{display:flex;gap:10px;align-items:center}
-.admin-title-actions .btn{white-space:nowrap}
-.manage-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.manage-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px #102b4015;border-color:#cbdbe4}
-.manage-card .card-actions button:hover{transform:translateY(-1px)}
-@media(max-width:680px){.admin-title-actions{margin-top:15px;align-items:stretch;flex-direction:column}.admin-title-actions .btn{width:100%}}
